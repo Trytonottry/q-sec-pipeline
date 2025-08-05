@@ -1,0 +1,17 @@
+registry: ghcr.io
+kyberLevel: Kyber768
+dilithiumLevel: Dilithium3
+kms:
+  provider: aws
+  region: us-east-1
+immutable: true
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+nodeSelector: {}
+tolerations: []
+affinity: {}

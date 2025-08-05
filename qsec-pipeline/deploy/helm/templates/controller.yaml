@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qsec-controller
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: qsec-controller }
+  template:
+    metadata:
+      labels: { app: qsec-controller }
+    spec:
+      serviceAccountName: qsec
+      containers:
+      - name: controller
+        image: ghcr.io/qsec-pipeline/controller:v1.0.0
+        ports:
+        - containerPort: 8080
+          name: metrics
+        resources: {{- toYaml .Values.resources | nindent 10 }}

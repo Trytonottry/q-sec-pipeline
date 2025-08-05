@@ -1,0 +1,9 @@
+apiVersion: v2
+name: qsec-pipeline
+description: Post-Quantum CI/CD Security Controller
+type: application
+version: 1.0.0
+appVersion: 1.0.0
+home: https://qsecpipeline.com
+sources:
+  - https://github.com/qsec-pipeline/qsec-pipeline

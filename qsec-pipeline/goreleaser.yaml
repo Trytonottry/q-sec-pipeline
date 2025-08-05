@@ -1,0 +1,26 @@
+project_name: qsec-pipeline
+builds:
+  - id: controller
+    main: ./cmd/qsec-controller
+    binary: qsec-controller
+    env: [CGO_ENABLED=1]
+    goos: [linux]
+    goarch: [amd64, arm64]
+  - id: cli
+    main: ./cmd/qsec-cli
+    binary: qsec-cli
+    env: [CGO_ENABLED=0]
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+dockers:
+  - image_templates: ["ghcr.io/qsec-pipeline/controller:v{{ .Version }}-amd64"]
+    dockerfile: Dockerfile
+    build_flag_templates: [--platform=linux/amd64]
+  - image_templates: ["ghcr.io/qsec-pipeline/controller:v{{ .Version }}-arm64"]
+    dockerfile: Dockerfile
+    build_flag_templates: [--platform=linux/arm64]
+docker_manifests:
+  - name_template: "ghcr.io/qsec-pipeline/controller:v{{ .Version }}"
+    image_templates:
+      - "ghcr.io/qsec-pipeline/controller:v{{ .Version }}-amd64"
+      - "ghcr.io/qsec-pipeline/controller:v{{ .Version }}-arm64"
